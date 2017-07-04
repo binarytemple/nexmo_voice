@@ -1,0 +1,27 @@
+ARG key
+
+ARG application_id
+
+ARG type
+
+FROM nexmo_build_private_util_${key}:latest
+
+ARG key
+
+ARG application_id
+
+ARG type
+
+WORKDIR /root/
+
+#COPY files/create-app.sh ./create-app.sh 
+
+# RUN ./create-app.sh $type $application_id 
+
+RUN nexmo app:create ${application_id} https://test.com https://test.com --keyfile=/root/${application_id}.key --type=${type} 
+
+RUN echo ${application_id} > .application_id
+
+COPY ./files/run-jwt-generate .
+
+CMD [ "/root/run-jwt-generate" ]

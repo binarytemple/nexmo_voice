@@ -1,0 +1,15 @@
+FROM node:latest
+
+ARG key
+
+ARG secret
+
+WORKDIR /root/
+
+RUN apt-get update && apt-get install -y vim 
+
+RUN npm install nexmo-cli -g
+
+RUN nexmo setup $key $secret
+
+CMD ["/bin/echo","utils and setup completed"]

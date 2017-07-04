@@ -1,0 +1,5 @@
+#!/bin/bash
+
+application_id=$(cat .application_id)
+
+/usr/local/bin/nexmo jwt:generate ./${application_id}.key application_id=${application_id}
